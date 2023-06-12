@@ -11,6 +11,7 @@ import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,20 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepository userRepository;
     private final JwtService jwtService;
     private  final PasswordEncoder passwordEncoder;
+
+    @Override
+    public AuthenticationResponse adminToken(SignInRequest signInRequest) {
+        User user1 = userRepository.findById(1L).orElseThrow(() -> new UsernameNotFoundException("user with email: 1 is not found!"));
+        String token = jwtService.generateToken(user1);
+        System.out.println(token);
+        return AuthenticationResponse.builder()
+                .email(user1.getEmail())
+                .token(token)
+                .role(user1.getRole())
+                .build();
+
+    }
+
     @Override
     public AuthenticationResponse signUp(SignUpRequest signUpRequest) {
         if (userRepository.existsByEmail(signUpRequest.getEmail())){

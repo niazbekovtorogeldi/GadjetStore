@@ -5,6 +5,7 @@ import com.example.springprojectlms.dto.authencationResponse.SignInRequest;
 import com.example.springprojectlms.dto.authencationResponse.SignUpRequest;
 
 public interface AuthenticationService {
+    AuthenticationResponse adminToken(SignInRequest signInRequest);
     AuthenticationResponse signUp(SignUpRequest signUpRequest);
     AuthenticationResponse signIn(SignInRequest signInRequest);
 }

@@ -3,6 +3,7 @@ package com.example.springprojectlms.service.impl;
 import com.example.springprojectlms.dto.SimpleResponse;
 import com.example.springprojectlms.dto.dtoUser.UserRequest;
 import com.example.springprojectlms.dto.dtoUser.UserResponse;
+import com.example.springprojectlms.entity.Product;
 import com.example.springprojectlms.entity.User;
 import com.example.springprojectlms.repository.UserRepository;
 import com.example.springprojectlms.service.UserService;
@@ -38,16 +39,30 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public SimpleResponse updateUser(Long id, UserRequest userRequest) {
-        return null;
+        User user = userRepository.findById(id).orElseThrow(()->new NullPointerException(""));
+        user.setFirstName(userRequest.firstName());
+        user.setLastName(userRequest.lastName());
+        user.setRole(user.getRole());
+        userRepository.save(user);
+        return SimpleResponse.builder()
+                .status(HttpStatus.OK)
+                .message(String.format(""))
+                .build();
     }
 
     @Override
     public UserResponse getUserById(Long id) {
-        return null;
+        return userRepository.findProductById(id).orElseThrow(()->new NullPointerException(""));
     }
 
     @Override
     public SimpleResponse deleteUserById(Long id) {
-        return null;
+       User user = userRepository.findById(id).orElseThrow(()-> new NullPointerException(""));
+       userRepository.delete(user);
+        return SimpleResponse.builder()
+                .status(HttpStatus.OK)
+                .message(String.format(""))
+                .build();
+
     }
 }

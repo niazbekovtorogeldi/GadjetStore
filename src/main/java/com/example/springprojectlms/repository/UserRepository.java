@@ -18,4 +18,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("select new com.example.springprojectlms.dto.dtoUser.UserResponse(u.firstName,u.lastName,u.role,u.password) from User u")
     List<UserResponse> getAllUsers();
+
+    Object findUserById(Long id);
+
+    Optional<UserResponse> findProductById(Long id);
 }
