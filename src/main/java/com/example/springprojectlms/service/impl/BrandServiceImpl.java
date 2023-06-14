@@ -4,23 +4,27 @@ import com.example.springprojectlms.dto.SimpleResponse;
 import com.example.springprojectlms.dto.dtoBrand.BrandRequest;
 import com.example.springprojectlms.dto.dtoBrand.BrandResponse;
 import com.example.springprojectlms.entity.Brand;
+import com.example.springprojectlms.entity.Product;
 import com.example.springprojectlms.repository.BrandRepository;
+import com.example.springprojectlms.repository.ProductRepository;
 import com.example.springprojectlms.service.BrandService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class BrandServiceImpl implements BrandService {
     private final BrandRepository brandRepository;
+
     @Override
     public List<BrandResponse> getAllBrands() {
-
         return brandRepository.getAllBrand();
     }
 
@@ -58,12 +62,14 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public SimpleResponse deleteBrandById(Long id) {
-        Brand brand = brandRepository.findById(id).orElseThrow(()->
-                new NullPointerException("not"));
-         brandRepository.delete(brand);
-         return SimpleResponse.builder()
-                 .status(HttpStatus.OK)
-                 .message(String.format(""))
-                 .build();
+        if (brandRepository.existsById(id)) {
+            brandRepository.deleteById(id);
+        } else throw new NullPointerException("User with ID: " + id + " is not found");
+
+        return SimpleResponse.builder()
+                .status(HttpStatus.OK)
+                .message("Successfully deleted")
+                .build();
     }
+
 }

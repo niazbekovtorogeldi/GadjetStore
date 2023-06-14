@@ -11,6 +11,7 @@ import java.util.List;
 
 public class ProductResponse {
     private Long id;
+    private String name;
     private int price;
     private List<String> image;
     private String characteristic;
@@ -18,8 +19,9 @@ public class ProductResponse {
     private String madeIn;
     private Category category;
 
-    public ProductResponse(Long id, int price, List<String> image, String characteristic, boolean isFavorite, String madeIn, Category category) {
+    public ProductResponse(Long id, String name, int price, List<String> image, String characteristic, boolean isFavorite, String madeIn, Category category) {
         this.id = id;
+        this.name = name;
         this.price = price;
         this.image = image;
         this.characteristic = characteristic;

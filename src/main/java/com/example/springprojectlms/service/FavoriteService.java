@@ -1,10 +1,18 @@
 package com.example.springprojectlms.service;
 
 import com.example.springprojectlms.dto.SimpleResponse;
-import com.example.springprojectlms.dto.dtoFavorite.FavoriteRequest;
-import org.springframework.stereotype.Service;
+import com.example.springprojectlms.dto.dtoProduct.ProductResponse;
+
+import java.util.List;
 
 public interface FavoriteService {
-    SimpleResponse saveFavorite(FavoriteRequest favoriteRequest);
-    SimpleResponse deleteFavorite(Long id);
+    SimpleResponse getAllFavorite();
+    SimpleResponse savetheUserFavoriteProducts(Long productId);
+
+
+//    SimpleResponse deleteFavoriteisUser(Long productId);
+
+    SimpleResponse deleted(Long productId);
+
+    List<ProductResponse> findAllByUsers(Long id);
 }

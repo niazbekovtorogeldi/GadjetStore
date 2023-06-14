@@ -19,6 +19,7 @@ public class Product {
     @GeneratedValue(generator = "product_gen", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "product_gen", sequenceName = "product_seq", allocationSize = 1)
     private Long id;
+    private String name;
     private int price;
     @Lob
     private List<String> image;
@@ -27,7 +28,7 @@ public class Product {
     private String madeIn;
     @Enumerated(EnumType.STRING)
     private Category category;
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST})
     private Brand brand;
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REMOVE},mappedBy = "products")
     private List<Basket>basket;

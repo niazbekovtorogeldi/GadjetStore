@@ -9,7 +9,8 @@ import java.util.List;
 
 @Builder
 
-public record ProductRequest(   Long id,
+public record ProductRequest(
+         String name,
          int price,
          List<String> image,
          String characteristic,

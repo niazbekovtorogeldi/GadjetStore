@@ -1,11 +1,11 @@
 package com.example.springprojectlms.service;
 
-import com.example.springprojectlms.dto.authencationResponse.AuthenticationResponse;
-import com.example.springprojectlms.dto.authencationResponse.SignInRequest;
-import com.example.springprojectlms.dto.authencationResponse.SignUpRequest;
+import com.example.springprojectlms.dto.authencationResponse.*;
 
 public interface AuthenticationService {
-    AuthenticationResponse adminToken(SignInRequest signInRequest);
-    AuthenticationResponse signUp(SignUpRequest signUpRequest);
-    AuthenticationResponse signIn(SignInRequest signInRequest);
+    AuthenticationResponse adminToken(AdminTokenRequest adminTokenResponse);
+    AuthenticationResponse signUp(AuthenticationRequest authenticationRequest);
+    AuthenticationResponse signIn(SignInRequest signIn);
+
+
 }

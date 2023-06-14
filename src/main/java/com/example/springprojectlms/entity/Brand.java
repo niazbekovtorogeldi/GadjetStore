@@ -20,7 +20,7 @@ public class Brand {
     private String brandName;
     private String image;
 
-    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST},mappedBy = "brand")
+    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REMOVE},mappedBy = "brand")
     private List<Product>products;
 
 

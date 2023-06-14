@@ -11,15 +11,15 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-
+    //@Query("select (u.firstName,u.lastName,u.password,u.phoneNumber,u.email,u.role)from User u")
     Optional<User> getUserByEmail(String email);
 
     boolean existsByEmail(String email);
 
     @Query("select new com.example.springprojectlms.dto.dtoUser.UserResponse(u.firstName,u.lastName,u.role,u.password) from User u")
     List<UserResponse> getAllUsers();
+@Query("select new com.example.springprojectlms.dto.dtoUser.UserResponse(u.id,u.firstName,u.lastName,u.email,u.password)from  User u")
+    Optional <UserResponse>findUserById(Long id);
 
-    Object findUserById(Long id);
 
-    Optional<UserResponse> findProductById(Long id);
 }

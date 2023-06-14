@@ -1,6 +1,7 @@
 package com.example.springprojectlms.config;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.example.springprojectlms.dto.dtoUser.UserResponse;
 import com.example.springprojectlms.entity.User;
 import com.example.springprojectlms.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -11,7 +12,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -57,4 +60,5 @@ public class JwtFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
 
     }
+
 }

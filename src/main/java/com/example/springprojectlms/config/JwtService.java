@@ -4,7 +4,13 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.springprojectlms.entity.User;
+import com.example.springprojectlms.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +18,10 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 
 @Component
+@RequiredArgsConstructor
     public class JwtService {
+
+    private final UserRepository userRepository;
 
         @Value("${spring.jwt.secret_key}")
         private String SECRET_KEY;
@@ -34,5 +43,11 @@ import java.util.Date;
             DecodedJWT jwt = jwtVerifier.verify(token);
             return jwt.getClaim("username").asString();
         }
+    public User getAuthentication(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        return userRepository.getUserByEmail(email).orElseThrow(() ->
+                new EntityNotFoundException("User not found!"));
+    }
     }
 

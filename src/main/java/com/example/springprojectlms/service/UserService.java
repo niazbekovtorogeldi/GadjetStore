@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface UserService {
+
     List<UserResponse> getAllUsers();
     SimpleResponse saveUser(UserRequest userRequest);
     SimpleResponse updateUser(Long id, UserRequest userRequest);

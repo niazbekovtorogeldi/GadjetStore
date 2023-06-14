@@ -34,7 +34,7 @@ private String password;
     private String phoneNumber;
     @Column(unique = true)
     private String email;
-    private ZonedDateTime createDate;
+    private ZonedDateTime createAt;
     private ZonedDateTime updateDate;
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -48,6 +48,14 @@ private String password;
     @OneToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REMOVE},mappedBy = "user")
     private Basket basket;
 
+    public User(String firstName, String lastName, String password, String phoneNumber, String email, Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.role = role;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
